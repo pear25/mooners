@@ -15,11 +15,27 @@ export default function CandlestickGraph({ graphData }: graphDataProps) {
 
     const options: ApexCharts.ApexOptions = {
         chart: {
+            selection: {
+                enabled: true
+            },
             type: 'candlestick',
             height: 350,
-            // zoom: {
-            //     enabled: true,
-            // },
+            zoom: {
+                enabled: true,
+            },
+            toolbar: {
+                show: true,
+                tools: {
+                    download: true,
+                    selection: true,
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: false,
+                    pan: true,
+                    customIcons: [],
+
+                },
+            }
         },
         series: [{
             data: graphData.length ? graphData.map(x => ({ x: new Date(x.time_period_start), y: [x.rate_open, x.rate_low, x.rate_high, x.rate_close] })) : mockData
@@ -28,7 +44,7 @@ export default function CandlestickGraph({ graphData }: graphDataProps) {
         xaxis: {
             type: 'datetime',
             tooltip: {
-                enabled: true
+                enabled: true,
             }
         },
         yaxis: {
@@ -37,10 +53,13 @@ export default function CandlestickGraph({ graphData }: graphDataProps) {
                 enabled: true,
             },
         },
+        tooltip: {
+            theme: 'dark'
+        }
     };
 
     return (
-        <div>
+        <div className='p-4'>
             {(typeof window !== 'undefined') &&
                 <ReactApexChart
                     options={options}
