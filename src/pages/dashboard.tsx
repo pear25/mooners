@@ -3,13 +3,10 @@ import SVG from "@/static/SVG"
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import MainBoard from "@/components/Dashboard/MainBoard"
-import { CoinAPI } from "@/api/coinAPI"
-import { subtractHours } from "@/utils/functions"
-import { Line } from 'react-chartjs-2';
 
 
 export default function Dashboard() {
-    const [showSidebar, setShowSidebar] = useState(true)
+    const [showSidebar, setShowSidebar] = useState<boolean>(true)
 
     const toggleSidebar = () => {
         setShowSidebar(prev => !prev)
@@ -31,7 +28,7 @@ export default function Dashboard() {
                     animate={showSidebar ? 'open' : 'closed'}>
                     <Sidebar />
                 </motion.div>
-                <MainBoard />
+                <MainBoard sidebarState={showSidebar} />
             </div>
         </>
     )
